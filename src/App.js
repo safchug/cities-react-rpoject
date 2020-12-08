@@ -1,12 +1,12 @@
 import "./App.css";
 import TopNavigation from "./Components/TopNavigation";
-import Login from "./Components/Auth/Login";
+import Home from "./Components/Home";
 
 function App() {
   return (
     <div className="App">
       <TopNavigation />
-      <Login />
+      <Home />
     </div>
   );
 }

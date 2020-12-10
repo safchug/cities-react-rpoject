@@ -1,12 +1,30 @@
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import TopNavigation from "./Components/Menu/TopNavigation";
+import routerParams from "./config/router.config";
+
+import StoreContext from "./store/StoreContext";
+import AuthService from "./store/AuthService";
+
 import "./App.css";
-import TopNavigation from "./Components/TopNavigation";
-import Home from "./Components/Home";
 
 function App() {
   return (
     <div className="App">
-      <TopNavigation />
-      <Home />
+      <StoreContext.Provider value={{ auth: new AuthService() }}>
+        <BrowserRouter>
+          <TopNavigation />
+          <Switch>
+            {routerParams.map((param) => (
+              <Route
+                path={param.path}
+                component={param.component}
+                exact={param.exact}
+              />
+            ))}
+          </Switch>
+        </BrowserRouter>
+      </StoreContext.Provider>
     </div>
   );
 }

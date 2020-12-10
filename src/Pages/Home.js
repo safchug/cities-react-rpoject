@@ -1,17 +1,16 @@
-import { Row, Col } from 'antd';
+import { Row, Col } from "antd";
 import CitiesList from "./Cities/CitiesList";
 import Search from "./Cities/Search";
 
 const Home = () => {
-
   return (
-      <Row justify="center">
+    <Row justify="center">
       <Col span={12}>
-          <Search />
-          <CitiesList />
+        <Search />
+        <CitiesList />
       </Col>
-      </Row>
-  )
+    </Row>
+  );
 };
 
 export default Home;

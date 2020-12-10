@@ -1,7 +1,11 @@
 @import "~antd/dist/antd.css";
 
-.mune_right {
+.menu_right {
   float: right;
+}
+
+.menu_left {
+  float: left;
 }
 
 .registraration {

@@ -1,5 +1,16 @@
 @import "~antd/dist/antd.css";
 
+body {
+  background-color: #7a7e85;
+}
+.city_card {
+  background: #ccc;
+}
+
+.search {
+  margin-top: 50px;
+}
+
 .menu_right {
   float: right;
 }
@@ -14,4 +25,10 @@
 
 .login {
   margin-top: 100px;
+}
+
+.city_info_card {
+  margin-top: 50px;
+  width: 500px;
+  background: #ccc;
 }

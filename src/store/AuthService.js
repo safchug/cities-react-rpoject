@@ -29,7 +29,7 @@ class AuthService {
 
       checkUser: action,
 
-      logOut: action
+      logOut: action,
     });
   }
 
@@ -92,14 +92,19 @@ class AuthService {
         runInAction(() => {
           this.user = response.data;
         });
+      } else {
+        throw new Error();
       }
     } catch (err) {
       localStorage.removeItem("accs_tkn");
+      runInAction(() => {
+        this.user = null;
+      });
     }
   }
 
   logOut() {
-    this.loginStatus = 'pending';
+    this.loginStatus = "pending";
     this.user = null;
     localStorage.removeItem("accs_tkn");
   }

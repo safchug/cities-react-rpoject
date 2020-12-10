@@ -5,7 +5,7 @@ import { SearchOutlined } from "@ant-design/icons";
 const Search = () => {
   return (
     <Fragment>
-      <Form>
+      <Form className="search">
         <Row gutter={[16, 16]}>
           <Col span={22}>
             <Form.Item>

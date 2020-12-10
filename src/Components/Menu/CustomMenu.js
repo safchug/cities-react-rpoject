@@ -12,8 +12,8 @@ const CustomMenu = observer(() => {
   }, []);
 
   const logOut = (e) => {
-      auth.logOut();
-  }
+    auth.logOut();
+  };
 
   return (
     <Menu mode="horizontal" theme="dark">
@@ -25,11 +25,11 @@ const CustomMenu = observer(() => {
       {auth.user ? (
         <Fragment>
           <Menu.Item key="logout" className="menu_right" onClick={logOut}>
-              Log out
+            Log out
           </Menu.Item>
-            <Menu.Item key="user" className="menu_right">
-                {auth.user.name}
-            </Menu.Item>
+          <Menu.Item key="user" className="menu_right">
+            {auth.user.name}
+          </Menu.Item>
         </Fragment>
       ) : (
         <Fragment>

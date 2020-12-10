@@ -7,6 +7,8 @@ const Home = () => {
     <Row justify="center">
       <Col span={12}>
         <Search />
+      </Col>
+      <Col span={20}>
         <CitiesList />
       </Col>
     </Row>

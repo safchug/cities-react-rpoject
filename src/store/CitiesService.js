@@ -8,6 +8,8 @@ class CitiesService {
   CitiesListError = null;
   city = null;
   cityError = null;
+  deleteCitySuccess = false;
+  deleteCityError = null;
 
   constructor() {
     makeObservable(this, {
@@ -18,6 +20,11 @@ class CitiesService {
 
       city: observable,
       fetchCityById: action,
+
+      deleteCitySuccess: observable,
+      deleteCityError: observable,
+      deleteCity: action,
+      clearDeletingState: action,
     });
   }
 
@@ -61,6 +68,32 @@ class CitiesService {
     } catch (err) {
       this.cityError = err;
     }
+  }
+
+  async deleteCity(id) {
+    try {
+      const token = localStorage.getItem("accs_tkn");
+      if (!token) throw new Error("User is not authorized");
+
+      const response = await axiosInstance({
+        method: "delete",
+        url: `cities/${id}`,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      runInAction(() => {
+        this.deleteCitySuccess = true;
+      });
+    } catch (err) {
+      runInAction(() => {
+        this.deleteCitySuccess = false;
+        this.deleteCityError = err;
+      });
+    }
+  }
+
+  clearDeletingState() {
+    this.deleteCityError = null;
+    this.deleteCitySuccess = false;
   }
 }
 

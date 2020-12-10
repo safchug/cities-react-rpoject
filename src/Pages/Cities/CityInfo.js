@@ -1,21 +1,40 @@
 import { Fragment, useContext, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { Typography, Space, Button, Row, Col, Card } from "antd";
+import { when } from "mobx";
+
 import { observer } from "mobx-react-lite";
 
 import StoreContext from "../../store/StoreContext";
-import { useParams } from "react-router-dom";
 
 const { Text } = Typography;
 
 const CityInfo = observer(() => {
-  const { cities } = useContext(StoreContext);
+  const { cities, auth } = useContext(StoreContext);
 
   const { id } = useParams();
+  const history = useHistory();
   const { city } = cities;
 
   useEffect(() => {
     cities.fetchCityById(id);
   }, []);
+
+  const goHome = () => {
+    history.push("/");
+  };
+
+  const deleteCity = () => {
+    cities.deleteCity(id);
+  };
+
+  when(
+    () => cities.deleteCitySuccess,
+    () => {
+      history.push("/");
+      cities.clearDeletingState();
+    }
+  );
 
   return (
     <div>
@@ -28,15 +47,15 @@ const CityInfo = observer(() => {
             </Col>
 
             <Col span={18}>
-              <Text mark>Population</Text>
+              <Text mark>Population </Text>
               {city.population}
             </Col>
             <Col span={18}>
-              <Text mark>Area</Text>
+              <Text mark>Area </Text>
               {city.area}
             </Col>
             <Col span={8}>
-              <Text mark>Found</Text>
+              <Text mark>Found </Text>
               {city.found}
             </Col>
             <Col span={8}>
@@ -50,8 +69,17 @@ const CityInfo = observer(() => {
               <Text mark>Mail</Text> {city.user.mail}
             </Col>
 
-            <Button type="primary">Update</Button>
-            <Button type="primary">Delete</Button>
+            {auth.user && city.userId === auth.user.id && (
+              <Fragment>
+                <Button type="primary">Update</Button>
+                <Button type="primary" onClick={deleteCity}>
+                  Delete
+                </Button>
+              </Fragment>
+            )}
+            <Button type="primary" onClick={goHome}>
+              Home
+            </Button>
           </Card>
         </Row>
       ) : null}

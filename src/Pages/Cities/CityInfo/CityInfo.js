@@ -2,10 +2,11 @@ import { Fragment, useContext, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Typography, Space, Button, Row, Col, Card } from "antd";
 import { when } from "mobx";
-
 import { observer } from "mobx-react-lite";
 
-import StoreContext from "../../store/StoreContext";
+import StoreContext from "../../../store/StoreContext";
+
+import "./style.css";
 
 const { Text } = Typography;
 
@@ -22,6 +23,10 @@ const CityInfo = observer(() => {
 
   const goHome = () => {
     history.push("/");
+  };
+
+  const goToUpdateFrom = () => {
+    history.push("/update_from");
   };
 
   const deleteCity = () => {
@@ -71,7 +76,9 @@ const CityInfo = observer(() => {
 
             {auth.user && city.userId === auth.user.id && (
               <Fragment>
-                <Button type="primary">Update</Button>
+                <Button type="primary" onClick={goToUpdateFrom}>
+                  Update
+                </Button>
                 <Button type="primary" onClick={deleteCity}>
                   Delete
                 </Button>

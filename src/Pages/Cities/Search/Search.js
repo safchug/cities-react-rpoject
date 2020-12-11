@@ -2,6 +2,8 @@ import { Form, Input, Button, Row, Col } from "antd";
 import { Fragment } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 
+import "./style.css";
+
 const Search = () => {
   return (
     <Fragment>

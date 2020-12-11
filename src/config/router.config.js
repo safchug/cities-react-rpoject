@@ -1,7 +1,10 @@
 import Home from "../Pages/Home";
 import Login from "../Pages/Auth/Login";
 import Registration from "../Pages/Auth/Registration";
-import CityInfo from "../Pages/Cities/CityInfo";
+import CityInfo from "../Pages/Cities/CityInfo/CityInfo";
+
+import AddCityFrom from "../Pages/Cities/AddCityFrom/AddCityForm";
+import UpdateCityFrom from "../Pages/Cities/UpdateCityFrom/UpdateCityForm";
 
 const routerParams = [
   {
@@ -22,6 +25,16 @@ const routerParams = [
   {
     path: "/city_info/:id",
     component: CityInfo,
+    exact: true,
+  },
+  {
+    path: "/add_form",
+    component: AddCityFrom,
+    exact: true,
+  },
+  {
+    path: "/update_from",
+    component: UpdateCityFrom,
     exact: true,
   },
 ];

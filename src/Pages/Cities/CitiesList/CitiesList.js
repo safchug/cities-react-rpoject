@@ -1,9 +1,11 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Col, Card, Row, Typography, Button } from "antd";
 import { observer } from "mobx-react-lite";
-import StoreContext from "../../store/StoreContext";
+import StoreContext from "../../../store/StoreContext";
 import { useHistory } from "react-router-dom";
-import Loader from "../../Components/UI/Loader/Loader";
+import Loader from "../../../Components/UI/Loader/Loader";
+
+import "./style.css";
 
 const CitiesList = observer(() => {
   const { Text } = Typography;

@@ -1,92 +1,44 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { useEffect, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import CityForm from "../../../Components/UI/Cities/CityForm/CityForm";
+import CityFormLayout from "../../../Components/UI/Cities/CityForm/CityFormLayout";
 
 import "./style.css";
+import { observer } from "mobx-react-lite";
+import StoreContext from "../../../store/StoreContext";
+import City from "../../../models/City";
+import CustomAlert from "../../../Components/UI/CustomAlert";
 
-const UpdateCityFrom = () => {
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
+const UpdateCityFrom = observer(() => {
+  const { cities } = useContext(StoreContext);
+
+  const initialState = new City("", "", "", "", "");
+  const [city, setCity] = useState(initialState);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    cities.fetchCityById(id);
+  }, []);
 
   const submit = (e) => {
-    console.log(e);
+    const city = new City(e.name, e.location, e.population, e.area, e.found);
+
+    cities.updateCity(id, city);
   };
 
   return (
-    <div className="update_city_from">
-      <Row justify="center">
-        <Col span={12}>
-          <Form onFinish={submit} {...layout}>
-            <Form.Item
-              name="name"
-              label="Name"
-              rules={[
-                {
-                  required: true,
-                  message: "Name is required!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="location"
-              label="Location"
-              rules={[
-                {
-                  required: true,
-                  message: "Location is required!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="population"
-              label="Population"
-              rules={[
-                {
-                  required: true,
-                  message: "Population is required!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="area"
-              label="Area"
-              rules={[
-                {
-                  required: true,
-                  message: "Area is required!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="found"
-              label="Found"
-              rules={[
-                {
-                  required: true,
-                  message: "Found is required!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Row justify="end">
-              <Button type="primary" htmlType="submit">
-                Update
-              </Button>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </div>
+    <CityFormLayout className="update_city_from">
+      {cities.updateCityStatus === "done" && (
+        <CustomAlert message="The city has been successfuly updated" />
+      )}
+      {cities.updateCityStatus === "error" && (
+        <CustomAlert message={cities.updateCityError} type="error" />
+      )}
+
+      <CityForm submit={submit} actionType="Update" data={cities.city} />
+    </CityFormLayout>
   );
-};
+});
 
 export default UpdateCityFrom;

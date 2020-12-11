@@ -33,7 +33,7 @@ const routerParams = [
     exact: true,
   },
   {
-    path: "/update_from",
+    path: "/update_from/:id",
     component: UpdateCityFrom,
     exact: true,
   },

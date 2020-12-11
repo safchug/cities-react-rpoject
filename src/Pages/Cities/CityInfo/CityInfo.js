@@ -26,7 +26,7 @@ const CityInfo = observer(() => {
   };
 
   const goToUpdateFrom = () => {
-    history.push("/update_from");
+    history.push(`/update_from/${id}`);
   };
 
   const deleteCity = () => {

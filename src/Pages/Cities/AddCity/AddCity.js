@@ -1,21 +1,27 @@
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 
-import CityForm from "../../../Components/UI/Cities/CityForm/CityForm";
-import CityFormLayout from "../../../Components/UI/Cities/CityForm/CityFormLayout";
+import CityFormLayout from "../../../Components/Layouts/CityForm/CityFormLayout";
 import StoreContext from "../../../store/StoreContext";
 import City from "../../../models/City";
-import CustomAlert from "../../../Components/UI/CustomAlert";
+import CustomAlert from "../../../Components/Alert/Alert";
 
-import "./style.css";
 import { observer } from "mobx-react-lite";
 
-const AddCityFrom = observer(() => {
+import "./style.css";
+import AddCityForm from "./AddCityForm/AddCityForm";
+
+const AddCity = observer(() => {
   const { cities } = useContext(StoreContext);
 
   const submit = (e) => {
     const city = new City(e.name, e.location, e.population, e.area, e.found);
 
     cities.addCity(city);
+  };
+
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
   };
 
   return (
@@ -27,9 +33,9 @@ const AddCityFrom = observer(() => {
         <CustomAlert message={cities.addCityError} type="error" />
       )}
 
-      <CityForm submit={submit} actionType="Add" />
+      <AddCityForm submit={submit}/>
     </CityFormLayout>
   );
 });
 
-export default AddCityFrom;
+export default AddCity;

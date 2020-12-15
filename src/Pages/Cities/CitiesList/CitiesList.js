@@ -3,7 +3,7 @@ import { Col, Card, Row, Typography, Button } from "antd";
 import { observer } from "mobx-react-lite";
 import StoreContext from "../../../store/StoreContext";
 import { useHistory } from "react-router-dom";
-import Loader from "../../../Components/UI/Loader/Loader";
+import Loader from "../../../Components/Loader/Loader";
 
 import "./style.css";
 
@@ -35,7 +35,6 @@ const CitiesList = observer(() => {
               className="city_card"
               extra={
                 <Button type="primary" onClick={showInfo.bind(null, city.id)}>
-                  {" "}
                   More
                 </Button>
               }

@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { Row, Col } from "antd";
 import { observer } from "mobx-react-lite";
 
-import StoreContext from "../../store/StoreContext";
-import User from "../../models/User";
-import RegistrationFrom from "../../Components/UI/RegistrationForm/RegistrationForm";
-import CustomAlert from "../../Components/UI/CustomAlert";
+import StoreContext from "../../../store/StoreContext";
+import User from "../../../models/User";
+import RegistrationForm from "./RegistrationForm/RegistrationForm";
+import CustomAlert from "../../../Components/Alert/Alert";
 
 const Registration = observer(() => {
   const { auth } = useContext(StoreContext);
@@ -20,7 +20,7 @@ const Registration = observer(() => {
       <Row justify="center" align="middle">
         <Col span="8">
           {auth.registrationStatus === "pending" && (
-            <RegistrationFrom submit={submit} />
+            <RegistrationForm submit={submit} />
           )}
           {auth.registrationStatus === "done" && (
             <CustomAlert
@@ -29,7 +29,7 @@ const Registration = observer(() => {
             />
           )}
           {auth.registrationStatus === "error" && (
-            <RegistrationFrom submit={submit} error={auth.registrationResult} />
+            <RegistrationForm submit={submit} error={auth.registrationResult} />
           )}
         </Col>
       </Row>

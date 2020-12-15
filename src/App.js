@@ -4,8 +4,8 @@ import TopNavigation from "./Components/Menu/TopNavigation";
 import routerParams from "./config/router.config";
 
 import StoreContext from "./store/StoreContext";
-import AuthService from "./store/AuthService";
-import CitiesService from "./store/CitiesService";
+import Auth from "./store/Auth";
+import Cities from "./store/Cities";
 
 import "./App.css";
 
@@ -14,8 +14,8 @@ function App() {
     <div className="App">
       <StoreContext.Provider
         value={{
-          auth: new AuthService(),
-          cities: new CitiesService(),
+          auth: new Auth(),
+          cities: new Cities(),
         }}
       >
         <BrowserRouter>

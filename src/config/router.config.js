@@ -1,10 +1,10 @@
 import Home from "../Pages/Home";
-import Login from "../Pages/Auth/Login";
-import Registration from "../Pages/Auth/Registration";
+import Login from "../Pages/Auth/Login/Login";
+import Registration from "../Pages/Auth/Registration/Registration";
 import CityInfo from "../Pages/Cities/CityInfo/CityInfo";
 
-import AddCityFrom from "../Pages/Cities/AddCityFrom/AddCityForm";
-import UpdateCityFrom from "../Pages/Cities/UpdateCityFrom/UpdateCityForm";
+import AddCityFrom from "../Pages/Cities/AddCity/AddCity";
+import UpdateCityFrom from "../Pages/Cities/UpdateCity/UpdateCity";
 
 const routerParams = [
   {

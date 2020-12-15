@@ -1,14 +1,14 @@
 import {
   makeObservable,
   observable,
-  computed,
   action,
   runInAction,
 } from "mobx";
 
-import axiosInstance from "../utils/AxiosInstance";
+import axiosInstance from "../services/api/axiosInstance";
+import api from "../services/api/api";
 
-class AuthService {
+class Auth {
   registrationStatus = "pending"; // "pending", "done" or "error"
   registrationResult = null;
 
@@ -31,15 +31,16 @@ class AuthService {
 
       logOut: action,
     });
+
   }
 
   async register(data) {
     try {
-      const response = await axiosInstance({
-        method: "post",
-        url: "/registration",
-        data,
-      });
+
+      const response = await api.makeRequest({
+        url: '/registration',
+        method: 'post',
+        body: data});
 
       runInAction(() => {
         this.registrationStatus = "done";
@@ -55,11 +56,10 @@ class AuthService {
 
   async login(data) {
     try {
-      const response = await axiosInstance({
-        method: "post",
-        url: "/login",
-        data,
-      });
+      const response = await api.makeRequest({
+        url: '/login',
+        method: 'post',
+        body: data});
       const token = response.data.accessToken;
       const { user } = response.data;
 
@@ -110,4 +110,4 @@ class AuthService {
   }
 }
 
-export default AuthService;
+export default Auth;

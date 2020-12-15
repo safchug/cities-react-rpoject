@@ -1,6 +1,6 @@
-import { Button, Form, Row } from "antd";
+import { Button, Row } from "antd";
 
-const CitiesButton = ({ children }) => (
+const SubmitButton = ({ children }) => (
   <Row justify="end">
     <Button type="primary" htmlType="submit">
       {children}
@@ -8,4 +8,4 @@ const CitiesButton = ({ children }) => (
   </Row>
 );
 
-export default CitiesButton;
+export default SubmitButton;

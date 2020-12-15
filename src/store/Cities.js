@@ -1,8 +1,8 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 
-import axiosInstance from "../utils/AxiosInstance";
+import axiosInstance from "../services/api/axiosInstance";
 
-class CitiesService {
+class Cities {
   citiesList = null;
   loading = false;
   CitiesListError = null;
@@ -153,4 +153,4 @@ class CitiesService {
   }
 }
 
-export default CitiesService;
+export default Cities;

@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { useHistory } from "react-router-dom";
 
-import StoreContext from "../../store/StoreContext";
-import LoginFrom from "../../Components/UI/LoginForm";
+import StoreContext from "../../../store/StoreContext";
+import LoginForm from "./LoginForm/LoginForm";
 
 const Login = observer(() => {
   const { auth } = useContext(StoreContext);
@@ -25,7 +25,7 @@ const Login = observer(() => {
       <Row justify="center" align="middle">
         <Col span="8">
           {auth.loginStatus === "pending" ? (
-            <LoginFrom submit={submit} />
+            <LoginForm submit={submit} />
           ) : (
             goHome()
           )}

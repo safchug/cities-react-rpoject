@@ -1,6 +1,6 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 
-import axiosInstance from "../services/api/axiosInstance";
+import api from "../services/api/api";
 
 class Cities {
   citiesList = null;
@@ -47,11 +47,10 @@ class Cities {
         this.loading = true;
       });
 
-      const addquery = query ? `?query=${query}` : "";
-
-      const response = await axiosInstance({
+      const response = await api.makeRequest({
+        url: "/cities",
         method: "get",
-        url: `/cities${addquery}`,
+        query,
       });
 
       runInAction(() => {
@@ -70,10 +69,11 @@ class Cities {
 
   async fetchCityById(id) {
     try {
-      const response = await axiosInstance({
-        method: "get",
+      const response = await api.makeRequest({
         url: `/cities/${id}`,
+        method: "get",
       });
+
       runInAction(() => {
         this.city = response.data;
       });
@@ -87,11 +87,12 @@ class Cities {
       const token = localStorage.getItem("accs_tkn");
       if (!token) throw new Error("User is not authorized");
 
-      await axiosInstance({
+      await api.makeRequest({
         method: "delete",
         url: `cities/${id}`,
-        headers: { Authorization: `Bearer ${token}` },
+        token,
       });
+
       runInAction(() => {
         this.deleteCitySuccess = true;
       });
@@ -112,12 +113,14 @@ class Cities {
     try {
       const token = localStorage.getItem("accs_tkn");
       if (!token) throw new Error("User is not authorized");
-      await axiosInstance({
-        method: "post",
-        url: "/cities",
-        headers: { Authorization: `Bearer ${token}` },
-        data: city,
-      });
+
+      await api.makeRequest(
+        {
+          method: "post",
+          url: "/cities",
+          data: city,
+          token
+        });
 
       runInAction(() => {
         this.addCityStatus = "done";
@@ -126,6 +129,7 @@ class Cities {
       runInAction(() => {
         this.addCityStatus = "error";
         this.addCityError = err;
+        console.log('addCityErr', err);
       });
     }
   }
@@ -134,10 +138,10 @@ class Cities {
     try {
       const token = localStorage.getItem("accs_tkn");
       if (!token) throw new Error("User is not authorized");
-      await axiosInstance({
+      await api.makeRequest({
         method: "put",
         url: `/cities/${id}`,
-        headers: { Authorization: `Bearer ${token}` },
+        token,
         data: city,
       });
 

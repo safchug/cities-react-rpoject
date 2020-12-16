@@ -1,9 +1,4 @@
-import {
-  makeObservable,
-  observable,
-  action,
-  runInAction,
-} from "mobx";
+import { makeObservable, observable, action, runInAction } from "mobx";
 
 import axiosInstance from "../services/api/axiosInstance";
 import api from "../services/api/api";
@@ -31,16 +26,15 @@ class Auth {
 
       logOut: action,
     });
-
   }
 
   async register(data) {
     try {
-
       const response = await api.makeRequest({
-        url: '/registration',
-        method: 'post',
-        body: data});
+        url: "/registration",
+        method: "post",
+        data,
+      });
 
       runInAction(() => {
         this.registrationStatus = "done";
@@ -57,9 +51,10 @@ class Auth {
   async login(data) {
     try {
       const response = await api.makeRequest({
-        url: '/login',
-        method: 'post',
-        body: data});
+        url: "/login",
+        method: "post",
+        data,
+      });
       const token = response.data.accessToken;
       const { user } = response.data;
 
@@ -81,12 +76,10 @@ class Auth {
     try {
       const token = localStorage.getItem("accs_tkn");
       if (token) {
-        console.log("token exists");
-        const response = await axiosInstance({
-          method: "post",
+        const response = api.makeRequest({
           url: "/auth",
-          headers: { Authorization: `Bearer ${token}` },
-          body: {},
+          method: "post",
+          token,
         });
 
         runInAction(() => {

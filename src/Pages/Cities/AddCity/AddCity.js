@@ -33,7 +33,7 @@ const AddCity = observer(() => {
         <CustomAlert message={cities.addCityError} type="error" />
       )}
 
-      <AddCityForm submit={submit}/>
+      <AddCityForm submit={submit} />
     </CityFormLayout>
   );
 });

@@ -1,11 +1,8 @@
-import localforage from 'localforage';
+import localforage from "localforage";
 
 export default {
-    async get(key) {
-        try {
-            
-        } catch (err) {
-
-        }
-    }
-}
+  async get(key) {
+    try {
+    } catch (err) {}
+  },
+};

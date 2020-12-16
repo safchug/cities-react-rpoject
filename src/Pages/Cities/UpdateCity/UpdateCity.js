@@ -19,7 +19,7 @@ const UpdateCity = () => {
     cities.updateCity(id, city);
   };
 
-  return <UpdateCityForm submit={submit}/>;
+  return <UpdateCityForm submit={submit} />;
 };
 
 export default UpdateCity;

@@ -1,6 +1,6 @@
 export const urls = {
-    login: {
-        method: "post",
-        url: "/login",
-    },
+  login: {
+    method: "post",
+    url: "/login",
+  },
 };

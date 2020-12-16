@@ -1,14 +1,13 @@
 import axiosInstance from "./axiosInstance";
 
 export default {
+  makeRequest({ url, method, data, query, token }) {
+    const addquery = query ? `?query=${query}` : "";
 
-    makeRequest({url, method, body, query, token}) {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-        const addquery = query ? `?query=${query}` : "";
-
-        return this.axiosInstance[method](`${url}${addquery}`,
-            body, {
-            headers: {}});
-
-    }
-}
+    return axiosInstance[method](`${url}${addquery}`, data, {
+      headers: headers,
+    });
+  },
+};

@@ -2,19 +2,24 @@ import { useContext } from "react";
 
 import CityFormLayout from "../../../Components/Layouts/CityForm/CityFormLayout";
 import StoreContext from "../../../store/StoreContext";
-import City from "../../../models/City";
-import CustomAlert from "../../../Components/Alert/Alert";
+import Alert from "../../../Components/Alert/Alert";
 
 import { observer } from "mobx-react-lite";
 
 import "./style.css";
-import AddCityForm from "./AddCityForm/AddCityForm";
+import AddCityForm from "../../../Components/AddCityForm/AddCityForm";
 
 const AddCity = observer(() => {
   const { cities } = useContext(StoreContext);
 
   const submit = (e) => {
-    const city = new City(e.name, e.location, e.population, e.area, e.found);
+    const city = {
+      name: e.name,
+      location: e.location,
+      population: e.population,
+      area: e.area,
+      found: e.found,
+    };
 
     cities.addCity(city);
   };
@@ -26,13 +31,7 @@ const AddCity = observer(() => {
 
   return (
     <CityFormLayout className="add_city_from">
-      {cities.addCityStatus === "done" && (
-        <CustomAlert message="the city has been added successfuly!" />
-      )}
-      {cities.addCityStatus === "error" && (
-        <CustomAlert message={cities.addCityError} type="error" />
-      )}
-
+      <Alert status={cities.addCityStatus} message={cities.addCityResult} />
       <AddCityForm submit={submit} />
     </CityFormLayout>
   );

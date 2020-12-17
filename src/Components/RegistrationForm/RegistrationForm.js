@@ -1,7 +1,7 @@
-import Form from "../../../../Components/Form/Wrapper/Form";
-import FormItem from "../../../../Components/Form/FormItem/FormItem";
-import FormItemPassword from "../../../../Components/Form/FormItemPassword/FromItemPassword";
-import SubmitButton from "../../../../Components/Form/SubmitButton/Button";
+import Form from "../Form/Wrapper/Form";
+import FormItem from "../Form/FormItem/FormItem";
+import FormItemPassword from "../Form/FormItemPassword/FromItemPassword";
+import SubmitButton from "../Form/SubmitButton/Button";
 import validation from "./validation";
 const RegistarationFrom = ({ submit }) => (
   <Form submit={submit}>

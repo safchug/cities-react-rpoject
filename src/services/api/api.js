@@ -6,8 +6,6 @@ export default {
 
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-    return axiosInstance[method](`${url}${addquery}`, data, {
-      headers: headers,
-    });
+    return axiosInstance({ method, url: `${url}${addquery}`, headers, data });
   },
 };

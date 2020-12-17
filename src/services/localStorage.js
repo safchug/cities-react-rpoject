@@ -5,4 +5,9 @@ export default {
     try {
     } catch (err) {}
   },
+
+  hasToken() {
+    const token = localStorage.getItem("accs_tkn");
+    return token ? true : false;
+  },
 };

@@ -1,10 +1,11 @@
 import Home from "../Pages/Home";
-import Login from "../Pages/Auth/Login/Login";
-import Registration from "../Pages/Auth/Registration/Registration";
+import Login from "../Pages/Auth/Login";
+import Registration from "../Pages/Auth/Registration";
 import CityInfo from "../Pages/Cities/CityInfo/CityInfo";
 
 import AddCityFrom from "../Pages/Cities/AddCity/AddCity";
-import UpdateCityFrom from "../Pages/Cities/UpdateCity/UpdateCity";
+import UpdateCity from "../Pages/Cities/UpdateCity/UpdateCity";
+import NotFound from "../Pages/NotFound";
 
 const routerParams = [
   {
@@ -31,11 +32,17 @@ const routerParams = [
     path: "/add_form",
     component: AddCityFrom,
     exact: true,
+    protected: true,
   },
   {
-    path: "/update_from/:id",
-    component: UpdateCityFrom,
+    path: "/update_form/:id",
+    component: UpdateCity,
     exact: true,
+    protected: true,
+  },
+  {
+    path: "*",
+    component: NotFound,
   },
 ];
 

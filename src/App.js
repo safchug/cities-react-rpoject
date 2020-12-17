@@ -8,8 +8,9 @@ import Auth from "./store/Auth";
 import Cities from "./store/Cities";
 
 import "./App.css";
+import ProtectedRoute from "./Components/Route/ProtectedRoute";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <StoreContext.Provider
@@ -21,18 +22,22 @@ function App() {
         <BrowserRouter>
           <TopNavigation />
           <Switch>
-            {routerParams.map((param) => (
-              <Route
-                path={param.path}
-                component={param.component}
-                exact={param.exact}
-              />
-            ))}
+            {routerParams.map((param) => {
+              if (param.protected) return <ProtectedRoute param={param} />;
+
+              return (
+                <Route
+                  path={param.path}
+                  component={param.component}
+                  exact={param.exact}
+                />
+              );
+            })}
           </Switch>
         </BrowserRouter>
       </StoreContext.Provider>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,6 @@
-import Form from "../../../../Components/Form/Wrapper/Form";
-import FormItem from "../../../../Components/Form/FormItem/FormItem";
-import SubmitButton from "../../../../Components/Form/SubmitButton/Button";
+import Form from "../Form/Wrapper/Form";
+import FormItem from "../Form/FormItem/FormItem";
+import SubmitButton from "../Form/SubmitButton/Button";
 
 const AddCityForm = ({ submit }) => (
   <Form submit={submit}>

@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "../services/api/api";
 
@@ -8,36 +8,15 @@ class Cities {
   CitiesListError = null;
   city = null;
   cityError = null;
-  deleteCitySuccess = false;
-  deleteCityError = null;
+  deleteCityStatus = "pending";
+  deleteCityResult = null;
   addCityStatus = "pending";
-  addCityError = null;
-  updateCityStatus = "";
-  updateCityError = null;
+  addCityResult = null;
+  updateCityStatus = "pending";
+  updateCityResult = null;
 
   constructor() {
-    makeObservable(this, {
-      citiesList: observable,
-      loading: observable,
-      CitiesListError: observable,
-      fetchCitiesList: action,
-
-      city: observable,
-      fetchCityById: action,
-
-      deleteCitySuccess: observable,
-      deleteCityError: observable,
-      deleteCity: action,
-      clearDeletingState: action,
-
-      addCityStatus: observable,
-      addCityError: observable,
-      addCity: action,
-
-      updateCityStatus: observable,
-      updateCityError: observable,
-      updateCity: action,
-    });
+    makeAutoObservable(this);
   }
 
   async fetchCitiesList(query) {
@@ -94,19 +73,19 @@ class Cities {
       });
 
       runInAction(() => {
-        this.deleteCitySuccess = true;
+        this.deleteCityStatus = "done";
+        this.deleteCityResult = "The city has been deleted";
       });
     } catch (err) {
       runInAction(() => {
-        this.deleteCitySuccess = false;
-        this.deleteCityError = err;
+        this.deleteCityStatus = "error";
+        if (err.response) {
+          this.addCityResult = err.response.message;
+        } else {
+          this.addCityResult = "Something went wrong";
+        }
       });
     }
-  }
-
-  clearDeletingState() {
-    this.deleteCityError = null;
-    this.deleteCitySuccess = false;
   }
 
   async addCity(city) {
@@ -114,22 +93,26 @@ class Cities {
       const token = localStorage.getItem("accs_tkn");
       if (!token) throw new Error("User is not authorized");
 
-      await api.makeRequest(
-        {
-          method: "post",
-          url: "/cities",
-          data: city,
-          token
-        });
+      await api.makeRequest({
+        method: "post",
+        url: "/cities",
+        data: city,
+        token,
+      });
 
       runInAction(() => {
         this.addCityStatus = "done";
+        this.addCityResult = "The city has been added";
       });
     } catch (err) {
       runInAction(() => {
         this.addCityStatus = "error";
-        this.addCityError = err;
-        console.log('addCityErr', err);
+
+        if (err.response) {
+          this.addCityResult = err.response.message;
+        } else {
+          this.addCityResult = "Something went wrong";
+        }
       });
     }
   }
@@ -154,6 +137,15 @@ class Cities {
         this.updateCityError = err;
       });
     }
+  }
+
+  clear() {
+    this.deleteCityStatus = "pending";
+    this.deleteCityResult = null;
+    this.addCityStatus = "pending";
+    this.addCityResult = null;
+    this.updateCityStatus = "pending";
+    this.updateCityResult = null;
   }
 }
 

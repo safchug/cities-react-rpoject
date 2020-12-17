@@ -1,12 +1,12 @@
 import { Fragment, useContext, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Typography, Space, Button, Row, Col, Card } from "antd";
-import { when } from "mobx";
 import { observer } from "mobx-react-lite";
 
 import StoreContext from "../../../store/StoreContext";
 
 import "./style.css";
+import Alert from "../../../Components/Alert/Alert";
 
 const { Text } = Typography;
 
@@ -26,23 +26,19 @@ const CityInfo = observer(() => {
   };
 
   const goToUpdateFrom = () => {
-    history.push(`/update_from/${id}`);
+    history.push(`/update_form/${id}`);
   };
 
   const deleteCity = () => {
     cities.deleteCity(id);
   };
 
-  when(
-    () => cities.deleteCitySuccess,
-    () => {
-      history.push("/");
-      cities.clearDeletingState();
-    }
-  );
-
   return (
     <div>
+      <Alert
+        status={cities.deleteCityStatus}
+        message={cities.deleteCityResult}
+      />
       {city ? (
         <Row justify="center">
           <Card title={city.name} className="city_info_card">

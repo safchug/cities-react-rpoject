@@ -1,8 +1,8 @@
-import Form from "../../../../Components/Form/Wrapper/Form";
-import FormItem from "../../../../Components/Form/FormItem/FormItem";
+import Form from "../Form/Wrapper/Form";
+import FormItem from "../Form/FormItem/FormItem";
 import validation from "./validation";
-import FormItemPassword from "../../../../Components/Form/FormItemPassword/FromItemPassword";
-import SubmitButton from "../../../../Components/Form/SubmitButton/Button";
+import FormItemPassword from "../Form/FormItemPassword/FromItemPassword";
+import SubmitButton from "../Form/SubmitButton/Button";
 
 const LoginForm = ({ submit }) => (
   <Form submit={submit}>

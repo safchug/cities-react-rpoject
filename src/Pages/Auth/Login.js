@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { useHistory } from "react-router-dom";
 
-import StoreContext from "../../../store/StoreContext";
-import LoginForm from "./LoginForm/LoginForm";
+import StoreContext from "../../store/StoreContext";
+import LoginForm from "../../Components/LoginForm/LoginForm";
 
 const Login = observer(() => {
   const { auth } = useContext(StoreContext);
@@ -16,7 +16,6 @@ const Login = observer(() => {
   };
 
   const goHome = () => {
-    console.log("go home has been called");
     history.push("/");
   };
 

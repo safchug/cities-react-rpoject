@@ -1,22 +1,23 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Col, Card, Row, Typography, Button } from "antd";
 import { observer } from "mobx-react-lite";
-import StoreContext from "../../../store/StoreContext";
+import StoreContext from "../../store/StoreContext";
 import { useHistory } from "react-router-dom";
-import Loader from "../../../Components/Loader/Loader";
+import Loader from "../Loader/Loader";
 
 import "./style.css";
 
-const CitiesList = observer(() => {
+const CitiesList = observer(({ query }) => {
   const { Text } = Typography;
 
   const { cities } = useContext(StoreContext);
   let history = useHistory();
 
-  useEffect(() => {
+  useEffect(async () => {
     console.log("effect");
-    cities.fetchCitiesList();
-  }, []);
+    await cities.clear();
+    cities.fetchCitiesList(query);
+  }, [query]);
 
   const showInfo = (id) => {
     history.push(`/city_info/${id}`);

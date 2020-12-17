@@ -1,6 +1,5 @@
-import { makeObservable, observable, action, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
-import axiosInstance from "../services/api/axiosInstance";
 import api from "../services/api/api";
 
 class Auth {
@@ -8,24 +7,11 @@ class Auth {
   registrationResult = null;
 
   loginStatus = "pending";
-  loginError = null;
+  loginResult = null;
   user = null;
 
   constructor() {
-    makeObservable(this, {
-      registrationStatus: observable,
-      registrationResult: observable,
-      register: action,
-
-      loginStatus: observable,
-      loginError: observable,
-      user: observable,
-      login: action,
-
-      checkUser: action,
-
-      logOut: action,
-    });
+    makeAutoObservable(this);
   }
 
   async register(data) {
@@ -38,12 +24,16 @@ class Auth {
 
       runInAction(() => {
         this.registrationStatus = "done";
-        this.registrationResult = response;
+        this.registrationResult = "You`ve been successfuly registrated";
       });
     } catch (err) {
       runInAction(() => {
         this.registrationStatus = "error";
-        this.registrationResult = err;
+        if (err.response) {
+          this.registrationResult = err.response.message;
+        } else {
+          this.registrationResult = "Something went wrong";
+        }
       });
     }
   }
@@ -67,7 +57,7 @@ class Auth {
     } catch (err) {
       runInAction(() => {
         this.loginStatus = "error";
-        this.loginError = err;
+        this.loginResult = err;
       });
     }
   }
@@ -76,7 +66,7 @@ class Auth {
     try {
       const token = localStorage.getItem("accs_tkn");
       if (token) {
-        const response = api.makeRequest({
+        const response = await api.makeRequest({
           url: "/auth",
           method: "post",
           token,
@@ -86,7 +76,7 @@ class Auth {
           this.user = response.data;
         });
       } else {
-        throw new Error();
+        throw new Error("anauthorized");
       }
     } catch (err) {
       localStorage.removeItem("accs_tkn");

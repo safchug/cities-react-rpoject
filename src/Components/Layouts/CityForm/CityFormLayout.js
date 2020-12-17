@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Row } from "antd";
 
 const CityFormLayout = ({ children, className }) => (
   <div className={className}>

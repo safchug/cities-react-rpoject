@@ -1,5 +1,4 @@
-import { observer } from "mobx-react-lite";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 
 import CustomMenu from "./CustomMenu";
 

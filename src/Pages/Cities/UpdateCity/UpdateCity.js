@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import "./style.css";
@@ -11,10 +11,6 @@ const UpdateCity = () => {
   const { cities } = useContext(StoreContext);
 
   const { id } = useParams();
-
-  useEffect(() => {
-    console.log("update id", id);
-  }, []);
 
   const submit = (e) => {
     const city = {

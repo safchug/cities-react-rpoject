@@ -24,11 +24,6 @@ const AddCity = observer(() => {
     cities.addCity(city);
   };
 
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
-
   return (
     <CityFormLayout className="add_city_from">
       <Alert status={cities.addCityStatus} message={cities.addCityResult} />

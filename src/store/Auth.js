@@ -16,7 +16,7 @@ class Auth {
 
   async register(data) {
     try {
-      const response = await api.makeRequest({
+      await api.makeRequest({
         url: "/registration",
         method: "post",
         data,

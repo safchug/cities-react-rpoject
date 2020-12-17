@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
 
-const FormItem = ({ name, label, value }) => (
-  <Form.Item name={name} label={label} value={value}>
+const FormItem = ({ name, label, value, rules }) => (
+  <Form.Item name={name} label={label} value={value} rules={rules}>
     <Input />
   </Form.Item>
 );

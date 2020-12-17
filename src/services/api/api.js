@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosInstance";
 
-export default {
+const api = {
   makeRequest({ url, method, data, query, token }) {
     const addquery = query ? `?query=${query}` : "";
 
@@ -9,3 +9,5 @@ export default {
     return axiosInstance({ method, url: `${url}${addquery}`, headers, data });
   },
 };
+
+export default api;

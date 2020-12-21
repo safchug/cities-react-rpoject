@@ -1,4 +1,14 @@
-# Getting Started with Create React App
+# CitiesReactProject
+
+##### Everybody should have ability:
+- to register
+- to login
+- to see list of cities
+- to look for a specific city
+##### Registered users can:
+- add city
+- delete city
+- update city
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
